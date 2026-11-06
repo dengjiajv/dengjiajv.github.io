@@ -141,7 +141,7 @@
     <div class="sec-head"><span class="sec-num">04</span><h2>联系</h2><span class="sec-sub">Contact</span></div>
     <div class="sec-body">
       <p class="body-p contact-note">如果对这里的主页或「量子信息速递」有建议，或者发现资料、论文里有纰漏、谬误、值得讨论的问题，欢迎直接来信。</p>
-      <div class="c-list"><a class="c-item" href="mailto:virgil@mail.ustc.edu.cn"><span class="c-label">邮箱</span><span class="c-value">virgil@mail.ustc.edu.cn</span></a><button class="c-item c-copy" type="button" data-copy="964824316"><span class="c-label">QQ</span><span class="c-value">964824316</span><span class="c-hint">点击复制</span></button><button class="c-item c-copy" type="button" data-copy="wxid_6bw9bulh5e2p22"><span class="c-label">微信</span><span class="c-value">wxid_6bw9bulh5e2p22</span><span class="c-hint">点击复制</span></button><a class="c-item" href="https://dengjiajv.pages.dev/" target="_blank" rel="noopener"><span class="c-label">国内镜像</span><span class="c-value">dengjiajv.pages.dev</span></a></div>
+      <div class="c-list"><a class="c-item" href="mailto:virgil@mail.ustc.edu.cn"><span class="c-label">邮箱</span><span class="c-value">virgil@mail.ustc.edu.cn</span></a><button class="c-item c-copy" type="button" data-enc="OTY0ODI0MzE2" aria-label="QQ，点击显示并复制"><span class="c-label">QQ</span><span class="c-value c-masked">点击显示</span><span class="c-hint">点击显示并复制</span></button><button class="c-item c-copy" type="button" data-enc="d3hpZF82Ync5YnVsaDVlMnAyMg==" aria-label="微信，点击显示并复制"><span class="c-label">微信</span><span class="c-value c-masked">点击显示</span><span class="c-hint">点击显示并复制</span></button><a class="c-item" href="https://dengjiajv.pages.dev/" target="_blank" rel="noopener"><span class="c-label">国内镜像</span><span class="c-value">dengjiajv.pages.dev</span></a></div>
       <p class="fill-note">本站同时发布在 GitHub Pages（<a href="https://dengjiajv.github.io/" target="_blank" rel="noopener">dengjiajv.github.io</a>）与 Cloudflare Pages 国内镜像（<a href="https://dengjiajv.pages.dev/" target="_blank" rel="noopener">dengjiajv.pages.dev</a>），内容一致；国内访问镜像更快。</p>
     </div>
   </section>
@@ -174,12 +174,27 @@
   onScroll();
 })();
 
-// 点击复制（QQ / 微信）
+// 点击显示并复制（QQ / 微信）：号码只以 base64 存在于 HTML，点击时才解码写入页面。
 (function(){
-  document.querySelectorAll('[data-copy]').forEach(function(el){
+  function decode(b64){
+    try {
+      var bin = atob(b64), bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      return new TextDecoder('utf-8').decode(bytes);
+    } catch (e) { return ''; }
+  }
+  document.querySelectorAll('[data-enc]').forEach(function(el){
+    var val = el.querySelector('.c-value');
     var hint = el.querySelector('.c-hint');
+    var revealed = false;
     el.addEventListener('click', function(){
-      var v = el.getAttribute('data-copy');
+      var v = decode(el.getAttribute('data-enc'));
+      if (!v) return;
+      if (!revealed) {
+        val.textContent = v;
+        val.classList.remove('c-masked');
+        revealed = true;
+      }
       var done = function(){
         el.classList.add('copied');
         if (hint) hint.textContent = '已复制';

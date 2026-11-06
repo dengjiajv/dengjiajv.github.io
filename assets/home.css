@@ -345,6 +345,10 @@ img { max-width: 100%; display: block; }
 a.c-item:hover, button.c-item:hover { border-color: #d3d2cb; transform: translateY(-1px); }
 .c-label { font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; }
 .c-value { font-size: 14px; color: var(--ink-2); }
+.c-value.c-masked {
+  color: var(--muted); letter-spacing: .02em;
+  font-family: var(--sans); font-size: 13px;
+}
 .c-hint {
   position: absolute; right: 12px; bottom: 8px;
   font-size: 10.5px; color: var(--muted); opacity: 0; transition: opacity .16s;
