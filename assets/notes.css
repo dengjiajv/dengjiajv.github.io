@@ -309,6 +309,24 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
 .footnotes li { margin: .45em 0; line-height: 1.65; }
 .footnotes li:target { background: #fffdf0; }
 
+/* ---------------------------------------------------------- 参考文献 */
+.bib { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); }
+.bib-title {
+  font-family: var(--serif); font-size: 20px; font-weight: 600; letter-spacing: .02em;
+  margin: 0 0 18px; display: flex; align-items: baseline; gap: 10px;
+}
+.bib-en { font-family: var(--sans); font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; font-weight: 400; }
+.bib-list { list-style: none; margin: 0; padding: 0; counter-reset: bib; }
+.bib-item {
+  display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px;
+  font-size: 13.6px; line-height: 1.75; color: var(--ink-2);
+  padding: 7px 8px; margin: 0 -8px; border-radius: 6px;
+  scroll-margin-top: 80px; text-wrap: pretty;
+}
+.bib-item:target { background: #fffdf0; }
+.bib-n { font-family: var(--sans); font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bib-body i { font-style: italic; }
+
 .center { text-align: center; margin: 1.1em 0; }
 
 /* ---------------------------------------------------------- 翻页 */
