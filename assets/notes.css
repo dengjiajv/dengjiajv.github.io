@@ -343,7 +343,7 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
   max-width: 880px; margin: 0 auto; padding: 46px 28px 100px;
 }
 .outline-hero {
-  display: grid; grid-template-columns: 1fr 190px; gap: 40px; align-items: center;
+  display: grid; grid-template-columns: 1fr 268px; gap: 40px; align-items: center;
   padding-bottom: 34px; border-bottom: 1px solid var(--line); margin-bottom: 14px;
 }
 .oh-text h1 {
@@ -368,7 +368,8 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
 }
 .oh-actions a:hover { border-bottom-color: var(--accent); }
 .oh-cover {
-  width: 190px; border-radius: var(--radius); display: block;
+  width: 268px; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: var(--radius); display: block;
   box-shadow: 0 6px 26px rgba(30, 40, 60, .16);
   border: 1px solid rgba(0, 0, 0, .06);
 }
@@ -488,7 +489,7 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
   .layout { padding: 0 18px; }
   .outline { padding: 30px 18px 80px; }
   .outline-hero { grid-template-columns: 1fr; gap: 22px; }
-  .oh-cover { width: 148px; order: -1; }
+  .oh-cover { width: 100%; max-width: 320px; order: -1; }
   .oh-text h1 { font-size: 25px; }
   .chapter-title { font-size: 24px; }
   .section-title { font-size: 19px; }
