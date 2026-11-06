@@ -48,18 +48,7 @@
     <div class="sec-body about">
       <p class="lede">2025 年本科毕业于中国科学技术大学（USTC）物理学专业原子与分子物理方向；目前在 USTC 光学与光学工程系量子科学与技术专业攻读博士学位，主要研究量子通信与量子纠缠相关理论。</p><p class="lede">本科与研究生期间担任过三年助教，也参与过两年「朋辈助学」帮扶计划的志愿工作。在研究和助教期间积累了一些学习与调研的笔记，放在这里供交流分享——请勿用于商业用途。</p>
 
-      <p class="lede">除了这些笔记，我还在维护一个论文速递站点「<a href="https://dengjiajv.github.io/quantum-digest/" target="_blank" rel="noopener">量子信息速递</a>」：它按 APS、Nature、Science、Optica 四大系列的目标期刊以及 PNAS 检索量子信息与量子技术领域的新发表工作，筛选掉不相干的方向后按期刊汇总成卡片，包含英文标题、作者、卷页与中文摘要，并且可通过提供的 DOI 访问原文，每天 08:00 自动更新。中文标题与摘要译文由模型生成，速度优先、难免疏漏，欢迎指出。</p>
-
-      <div class="addr">
-        <a class="addr-row" href="https://dengjiajv.github.io/" target="_blank" rel="noopener">
-          <span class="addr-k">GitHub</span>
-          <span class="addr-v">dengjiajv.github.io</span>
-        </a>
-        <a class="addr-row" href="https://dengjiaju.pages.dev/" target="_blank" rel="noopener">
-          <span class="addr-k">镜像</span>
-          <span class="addr-v">dengjiaju.pages.dev</span>
-        </a>
-      </div>
+      <p class="lede">除了这些笔记，我还在维护一个论文速递站点「<a class="digest-link" href="https://dengjiajv.github.io/quantum-digest/" data-gh="https://dengjiajv.github.io/quantum-digest/" data-mirror="https://quantum-digest-b6i.pages.dev/" target="_blank" rel="noopener">量子信息速递</a>」：它按 APS、Nature、Science、Optica 四大系列的目标期刊以及 PNAS 检索量子信息与量子技术领域的新发表工作，筛选掉不相干的方向后按期刊汇总成卡片，包含英文标题、作者、卷页与中文摘要，并且可通过提供的 DOI 访问原文，每天 08:00 自动更新。中文标题与摘要译文由模型生成，速度优先、难免疏漏，欢迎指出。</p>
     </div>
   </section>
 
@@ -104,12 +93,12 @@
 
       <h3 class="sub-h">工具<span class="sub-h-en">Toolkit</span></h3>
       <div class="tool-grid"><article class="tool">
-        <div class="dir-head"><h3>理论工具</h3><span class="dir-en">Theoretical Toolkit</span></div>
+        <div class="dir-head"><h3>数学工具</h3><span class="dir-en">Mathematical Toolkit</span></div>
         <p class="dir-d">从公理与定义出发搭建概念的框架，决定哪些对象可以被定义、定义是否自洽。例如：选择公理保证每个向量空间都有基；内积的定义决定了它诱导出的范数与拓扑。</p>
         <ul class="tags"><li>算子理论</li><li>凸几何</li><li>测度与积分</li><li>C*-代数</li></ul>
       </article><article class="tool">
-        <div class="dir-head"><h3>应用工具</h3><span class="dir-en">Applied Toolkit</span></div>
-        <p class="dir-d">可直接用于计算与估计的定量结论，把抽象的量约束到可操作的范围。例如：熵不确定关系给出猜测熵的上界；（推广）熵累积定理说明熵如何沿整条协议累积；概率估计因子把有限统计带来的偏差收进可加项。后续还会收入矩阵分析（如弱主序）、凸优化与常见的集中不等式。</p>
+        <div class="dir-head"><h3>物理工具</h3><span class="dir-en">Physics Toolkit</span></div>
+        <p class="dir-d">可直接用于计算与估计的定量结论，把抽象的量约束到可操作的范围。例如：熵不确定关系给出猜测熵的上界；（推广）熵累积定理说明熵如何沿整条协议累积；概率估计因子把有限统计带来的偏差收进可加项。</p>
         <ul class="tags"><li>熵不确定关系</li><li>（推广）熵累积定理（EAT）</li><li>概率估计因子（PEF）</li><li>sandwiched Rényi 熵</li></ul>
       </article></div>
 
@@ -172,6 +161,16 @@
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+})();
+
+// 速递站链接跟随访问来源：GitHub Pages 打开走 GitHub 原站，国内镜像打开走镜像站。
+(function(){
+  var a = document.querySelector('.digest-link');
+  if (!a) return;
+  var host = location.hostname;
+  var isMirror = /.pages.dev$/i.test(host);
+  var target = isMirror ? a.getAttribute('data-mirror') : a.getAttribute('data-gh');
+  if (target) a.setAttribute('href', target);
 })();
 
 // 点击显示并复制（QQ / 微信）：号码只以 base64 存在于 HTML，点击时才解码写入页面。

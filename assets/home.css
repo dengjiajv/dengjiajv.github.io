@@ -155,22 +155,6 @@ img { max-width: 100%; display: block; }
 .gap { height: 26px; }
 .dot-sep { color: var(--muted); margin: 0 .5em; }
 
-/* 关于里的两个站址 */
-.addr { margin: 26px 0 0; border-top: 1px solid var(--line-2); }
-.addr-row {
-  display: flex; align-items: baseline; gap: 14px;
-  padding: 12px 4px; border-bottom: 1px solid var(--line-2);
-  transition: background .16s, padding-left .16s;
-}
-.addr-row:hover { background: rgba(29, 78, 111, .028); padding-left: 10px; }
-.addr-k {
-  flex: 0 0 62px; font-size: 11px; letter-spacing: .1em;
-  color: var(--muted); text-transform: uppercase;
-}
-.addr-v {
-  font-family: var(--mono); font-size: 13.4px; color: var(--ink-2); word-break: break-all;
-}
-
 .fill-note {
   font-size: 12.5px; color: var(--muted); line-height: 1.7;
   margin: 0 0 30px; padding-left: 11px; border-left: 2px solid var(--line);
@@ -360,7 +344,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* -------------------------------------------------- 联系 */
-.contact-note { margin-bottom: 20px; max-width: 700px; }
+.contact-note { margin-bottom: 20px; }
 .c-list { display: flex; flex-wrap: wrap; gap: 10px; }
 .c-item {
   display: flex; flex-direction: column; gap: 2px; position: relative;
@@ -429,5 +413,4 @@ a.c-item:hover, button.c-item:hover { border-color: #d3d2cb; transform: translat
   .w-item { grid-template-columns: 1fr; }
   .w-date { grid-row: auto; }
   .c-item { min-width: 0; flex: 1 1 100%; }
-  .addr-k { flex-basis: 48px; }
 }
