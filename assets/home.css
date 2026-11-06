@@ -96,11 +96,14 @@ img { max-width: 100%; display: block; }
 
 .hero-mark {
   position: absolute; right: 32px; top: 190px; z-index: 0;
-  font-family: var(--serif); color: rgba(29, 78, 111, .10);
   text-align: right; pointer-events: none; user-select: none;
+  opacity: .13;
 }
-.mark-eq { display: block; font-size: 52px; line-height: 1.1; }
-.mark-sub { display: block; font-size: 30px; margin-top: 6px; }
+.hero-mark .katex { color: var(--accent); }
+.mark-eq, .mark-sub { display: block; }
+.mark-eq .katex { font-size: 2.05em; }
+.mark-sub { margin-top: 10px; }
+.mark-sub .katex { font-size: 1.28em; }
 
 /* -------------------------------------------------- 区块 */
 .sec { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
@@ -155,8 +158,6 @@ img { max-width: 100%; display: block; }
 .addr-v {
   font-family: var(--mono); font-size: 13.4px; color: var(--ink-2); word-break: break-all;
 }
-.addr-a { margin-left: auto; font-size: 12px; color: var(--muted); }
-.addr-row:hover .addr-a { color: var(--accent); }
 
 .fill-note {
   font-size: 12.5px; color: var(--muted); line-height: 1.7;
@@ -215,9 +216,10 @@ img { max-width: 100%; display: block; }
 .book-cta {
   font-size: 13.8px; font-weight: 500; color: var(--accent);
   display: inline-flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
+  transition: border-color .16s;
 }
-.arrow { transition: transform .2s; display: inline-block; }
-.book-cta:hover .arrow { transform: translateX(4px); }
+.book-cta:hover { border-bottom-color: var(--accent); }
 
 /* -------------------------------------------------- 研究 / 方向 */
 .dir-grid {
@@ -260,6 +262,7 @@ img { max-width: 100%; display: block; }
   font-family: var(--serif); font-size: 20px; font-weight: 600;
   margin: 40px 0 4px; letter-spacing: .01em;
 }
+.sub-h-first { margin-top: 0; }
 .sub-h-en {
   font-family: var(--sans); font-size: 11px; letter-spacing: .14em;
   color: var(--muted); text-transform: uppercase; font-weight: 400;
@@ -301,10 +304,11 @@ img { max-width: 100%; display: block; }
 }
 .paper-links { display: flex; gap: 20px; margin-top: 16px; }
 .paper-links a {
-  font-size: 13px; color: var(--accent); display: inline-flex; align-items: center; gap: 5px;
+  font-size: 13px; color: var(--accent);
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
+  transition: border-color .16s;
 }
-.paper-links a:hover .arrow { transform: translate(2px, -2px); }
-.paper-links .arrow:hover { transform: none; }
+.paper-links a:hover { border-bottom-color: var(--accent); }
 
 /* -------------------------------------------------- 写作 */
 .w-list { display: flex; flex-direction: column; }

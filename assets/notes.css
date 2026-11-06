@@ -364,9 +364,9 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
 .oh-actions a {
   font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--accent);
   display: inline-flex; align-items: center; gap: 6px;
+  border-bottom: 1px solid transparent; padding-bottom: 1px;
 }
-.oh-actions a:hover .arrow { transform: translateX(4px); }
-.oh-actions .arrow { transition: transform .2s; }
+.oh-actions a:hover { border-bottom-color: var(--accent); }
 .oh-cover {
   width: 190px; border-radius: var(--radius); display: block;
   box-shadow: 0 6px 26px rgba(30, 40, 60, .16);
@@ -449,9 +449,10 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
 
 .to-top {
   position: fixed; right: 26px; bottom: 26px; z-index: 50;
-  width: 38px; height: 38px; border-radius: 50%;
+  padding: 0 14px; height: 34px;
+  border-radius: 999px;
   border: 1px solid var(--line); background: var(--paper); color: var(--ink-3);
-  font-size: 15px; line-height: 1; cursor: pointer;
+  font-size: 12px; letter-spacing: .04em; line-height: 1; cursor: pointer;
   font-family: var(--sans);
   opacity: 0; transform: translateY(8px); pointer-events: none;
   transition: opacity .2s, transform .2s, border-color .2s, color .2s;

@@ -83,7 +83,7 @@
   toTop.className = 'to-top';
   toTop.type = 'button';
   toTop.title = '回到顶部';
-  toTop.innerHTML = '↑';
+  toTop.textContent = '回到顶部';
   toTop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
