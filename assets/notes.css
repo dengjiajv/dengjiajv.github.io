@@ -286,6 +286,79 @@ ol.list > li::before {
 .list.depth-0 { padding-left: 1.55em; }
 .list.depth-0 > li::before { font-size: .86em; }
 
+/* 讲义版列表：编号由 <span class="li-lab"> 给出（支持 1. / (1) / Method 1） */
+ol.enum { list-style: none; counter-reset: none; padding-left: 2.2em; }
+ol.enum > li { position: relative; counter-increment: none; }
+ol.enum > li::before { content: none; }
+.li-lab {
+  position: absolute; left: -2.2em; top: 0; min-width: 1.9em;
+  font-family: var(--sans); font-size: .86em; line-height: 1.9;
+  color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+ol.enum.depth-1 { padding-left: 2.4em; }
+ol.enum.depth-1 > li > .li-lab { left: -2.4em; }
+ol.enum.depth-2 { padding-left: 3.4em; }
+ol.enum.depth-2 > li > .li-lab { left: -3.4em; }
+
+/* 多栏排版（multicols） */
+.multicols {
+  column-count: var(--cols, 2); column-gap: 32px; margin: .8em 0 1.1em;
+}
+.multicols > p:first-child { margin-top: 0; }
+@media (max-width: 720px) { .multicols { column-count: 1; } }
+
+/* 插图 */
+.fig { margin: 1.4em 0 1.6em; text-align: center; }
+.fig-img { display: inline-block; max-width: 100%; height: auto; border-radius: 4px; }
+.fig-multi { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; justify-content: center; }
+.fig-multi .fig-img { flex: 0 0 auto; }
+.fig-cap {
+  margin-top: 10px; font-family: var(--sans); font-size: 13px; color: var(--ink-3);
+  line-height: 1.65; text-wrap: pretty;
+}
+.fig-n { font-weight: 600; color: var(--ink-2); margin-right: 6px; }
+
+/* 讲义页顶部：原件链接 + 可选内嵌 PDF */
+.src-bar {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap;
+  margin: 20px 0 26px; padding-bottom: 12px; border-bottom: 1px solid var(--line);
+}
+.src-tip { font-family: var(--sans); font-size: 12px; color: var(--muted); }
+.src-links { display: flex; gap: 20px; }
+.src-links a {
+  font-size: 13px; color: var(--accent);
+  border-bottom: 1px solid transparent; padding-bottom: 1px; text-decoration: none;
+}
+.src-links a:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+.pdf-embed { margin: 0 0 26px; }
+.pdf-embed > summary {
+  cursor: pointer; font-family: var(--sans); font-size: 12.5px; color: var(--ink-3);
+  padding: 6px 0; list-style: none;
+}
+.pdf-embed > summary::-webkit-details-marker { display: none; }
+.pdf-embed > summary::before { content: "＋ "; color: var(--muted); }
+.pdf-embed[open] > summary::before { content: "－ "; }
+.pdf-embed > summary:hover { color: var(--accent); }
+.pdf-embed .pdf-wrap { margin-top: 10px; }
+
+/* 讲义里个性化的定理块（解 / 注 / 另解） */
+.thm-solution, .thm-note {
+  border-left-color: #b9b8b0; background: #fcfcfa;
+}
+.thm-solution .thm-head, .thm-note .thm-head { background: #f6f6f2; }
+.thm-solution .thm-name, .thm-note .thm-name { color: var(--ink-2); }
+
+/* \textcolor{red}{…} 之类 */
+.tc-red { color: #b4372e; }
+.tc-blue { color: #1d4e6f; }
+.tc-green { color: #2f6b4f; }
+.tc-orange { color: #a5601c; }
+.tc-purple { color: #6b4a8a; }
+.tc-gray, .tc-grey { color: var(--ink-3); }
+.tc-black { color: var(--ink); }
+
 /* ---------------------------------------------------------- 引用/脚注/文献 */
 .ref { border-bottom: 1px solid rgba(29, 78, 111, .28); }
 .ref:hover { text-decoration: none; border-bottom-color: var(--accent); }
@@ -612,6 +685,15 @@ body.lb-open { overflow: hidden; }
   .m .katex-html,
   .m .katex-base { white-space: normal; }
 }
+
+/* 讲义页：行内公式常常比正文栏还长（有的近 1000px），宽屏也必须允许折行，
+   否则整页横向溢出。视觉上与窄屏一致。 */
+body.calc-page .m,
+body.calc-page .m .katex,
+body.calc-page .m .katex-html,
+body.calc-page .m .katex-base { white-space: normal; }
+body.calc-page .note p,
+body.calc-page .note li { overflow-wrap: break-word; }
 
 @media (max-width: 1000px) {
   .layout { grid-template-columns: 1fr; gap: 0; padding: 0 22px; }
