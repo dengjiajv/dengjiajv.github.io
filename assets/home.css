@@ -185,7 +185,8 @@ img { max-width: 100%; display: block; }
 }
 .book-cover { position: relative; align-self: start; }
 .book-cover img {
-  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  /* 不锁死比例：16:9 的书封与 4:3 的照片各自按原比例显示 */
+  display: block; width: 100%; height: auto;
   border-radius: 8px;
   box-shadow: 0 8px 28px rgba(25, 35, 55, .18);
   border: 1px solid rgba(0, 0, 0, .06);

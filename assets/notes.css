@@ -383,10 +383,13 @@ sup.fn a:hover { background: var(--accent-soft); color: var(--accent); text-deco
   font-family: var(--sans); font-size: 13.5px; font-weight: 500; color: var(--accent);
   display: inline-flex; align-items: center; gap: 6px;
   border-bottom: 1px solid transparent; padding-bottom: 1px;
+  text-decoration: none;
 }
-.oh-actions a:hover { border-bottom-color: var(--accent); }
+/* 只在悬停时给一条下划线：全局 a:hover 自带 text-decoration，这里必须压掉，否则会叠成双线 */
+.oh-actions a:hover { border-bottom-color: var(--accent); text-decoration: none; }
 .oh-cover {
-  width: 268px; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+  /* 不锁死比例：16:9 的书封与 4:3 的照片各自按原比例显示 */
+  width: 268px; height: auto;
   border-radius: var(--radius); display: block;
   box-shadow: 0 6px 26px rgba(30, 40, 60, .16);
   border: 1px solid rgba(0, 0, 0, .06);
@@ -475,6 +478,17 @@ body.lb-open { overflow: hidden; }
 .ch-card:hover { border-left-color: var(--accent); background: rgba(29, 78, 111, .022); }
 .ch-line { display: flex; align-items: baseline; gap: 12px; text-decoration: none; }
 .ch-line:hover { text-decoration: none; }
+/* 卡片横条：左半边是进入详情页的链接，右侧依次是「下载PDF」与页数 */
+.ch-main {
+  display: flex; align-items: baseline; gap: 12px;
+  flex: 1 1 auto; min-width: 0; text-decoration: none;
+}
+.ch-main:hover { text-decoration: none; }
+.ch-dl {
+  font-family: var(--sans); font-size: 12px; color: var(--accent);
+  flex: 0 0 auto; border-bottom: 1px solid transparent; padding-bottom: 1px;
+}
+.ch-dl:hover { border-bottom-color: var(--accent); text-decoration: none; }
 .ch-num {
   font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--muted);
   min-width: 18px; font-variant-numeric: tabular-nums;
