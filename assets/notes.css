@@ -154,7 +154,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .note > p:first-of-type { margin-top: 0; }
 
 /* 中文段落首行不缩进，靠段距分隔；但连续正文保持舒适行宽 */
-.note p, .note li { text-align: justify; text-justify: inter-ideograph; }
+.note p, .note li { text-align: justify; text-justify: inter-ideograph; text-wrap: pretty; }
 
 .section-title {
   font-size: 21px; font-weight: 600; line-height: 1.4;
