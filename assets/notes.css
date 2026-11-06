@@ -508,7 +508,9 @@ body.lb-open { overflow: hidden; }
 .it-en {
   font-family: var(--sans); font-size: 12px; color: var(--muted);
   margin: 5px 0 0 30px; letter-spacing: .04em;
+  display: flex; gap: 10px; align-items: baseline;
 }
+.it-date { font-variant-numeric: tabular-nums; color: var(--ink-3); }
 
 /* PDF 阅读条 */
 .pdf-bar {
