@@ -171,6 +171,7 @@ img { max-width: 100%; display: block; }
 .i-d { display: block; font-size: 13.2px; color: var(--ink-3); line-height: 1.65; }
 
 /* -------------------------------------------------- 书卡 */
+.book-list { display: flex; flex-direction: column; gap: 20px; }
 .book {
   display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 32px;
   padding: 26px; border-radius: 14px;
