@@ -498,6 +498,9 @@ body.lb-open { overflow: hidden; }
 .ch-secs {
   font-family: var(--sans); font-size: 11.5px; color: var(--muted);
   flex: 0 0 auto; letter-spacing: .04em;
+  /* 固定宽度、右对齐：页码一位数还是两位数都不影响「下载PDF」的横向位置 */
+  min-width: 3.4em; text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 .ch-toc {
   display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 7px 0 0 30px;
