@@ -678,22 +678,40 @@ body.lb-open { overflow: hidden; }
 
 /* ---------------------------------------------------------- 响应式 */
 
-/* 窄屏下允许超长行内公式折行，避免整页横向溢出 */
-@media (max-width: 1100px) {
-  .m,
-  .m .katex,
-  .m .katex-html,
-  .m .katex-base { white-space: normal; }
-}
+/* 行内公式绝不折行。
+   早期为了消除横向溢出，曾在窄屏/讲义页把 .m 与 .katex-base 的 white-space 改成
+   normal；但 .katex-base 是 width:min-content 的 inline-block，一旦允许折行，
+   一个公式会被竖着拆成好几行，行盒高度暴涨，整段文字被顶上去——就是"公式跑到上一行"
+   那个错版。现在统一保持 nowrap，超长公式改由所在段落横向滚动（见下面的 .ovf-x）。 */
+.m,
+.m .katex,
+.m .katex-html,
+.m .katex-base { white-space: nowrap; }
 
-/* 讲义页：行内公式常常比正文栏还长（有的近 1000px），宽屏也必须允许折行，
-   否则整页横向溢出。视觉上与窄屏一致。 */
-body.calc-page .m,
-body.calc-page .m .katex,
-body.calc-page .m .katex-html,
-body.calc-page .m .katex-base { white-space: normal; }
-body.calc-page .note p,
-body.calc-page .note li { overflow-wrap: break-word; }
+/* 由 notes.js 在加载后给"内容确实超宽"的段落打上 .ovf-x：
+   只有这种段落才成为横向滚动容器，其余段落保持普通流，不影响行距与基线。 */
+.note p.ovf-x,
+.note li.ovf-x,
+.footnotes li.ovf-x,
+.thm-body p.ovf-x,
+.thm-body li.ovf-x {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #d8d7d0 transparent;
+}
+.note p.ovf-x::-webkit-scrollbar,
+.note li.ovf-x::-webkit-scrollbar,
+.footnotes li.ovf-x::-webkit-scrollbar,
+.thm-body p.ovf-x::-webkit-scrollbar,
+.thm-body li.ovf-x::-webkit-scrollbar { height: 6px; }
+.note p.ovf-x::-webkit-scrollbar-thumb,
+.note li.ovf-x::-webkit-scrollbar-thumb,
+.footnotes li.ovf-x::-webkit-scrollbar-thumb,
+.thm-body p.ovf-x::-webkit-scrollbar-thumb,
+.thm-body li.ovf-x::-webkit-scrollbar-thumb {
+  background: #dedcd5; border-radius: 3px;
+}
 
 @media (max-width: 1000px) {
   .layout { grid-template-columns: 1fr; gap: 0; padding: 0 22px; }

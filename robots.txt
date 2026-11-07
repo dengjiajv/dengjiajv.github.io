@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Both deployment endpoints serve identical content
+Sitemap: https://dengjiajv.github.io/sitemap.xml
+Sitemap: https://dengjiaju.pages.dev/sitemap.xml

@@ -78,7 +78,33 @@
     });
   });
 
-  // ---------- 5. 回到顶部 ----------
+  // ---------- 5. 超长行内公式让所在段落横向滚动 ----------
+  // 公式本身保持 nowrap（折行会把公式拆成多行、把文字顶上去），
+  // 只给"内容确实超出可视宽度"的段落加 .ovf-x，避免所有段落都变滚动容器。
+  function markOverflow() {
+    var hosts = document.querySelectorAll(
+      '.note p, .note li, .thm-body p, .thm-body li, .footnotes li'
+    );
+    Array.prototype.forEach.call(hosts, function (el) {
+      if (el.scrollWidth > el.clientWidth + 1) el.classList.add('ovf-x');
+      else el.classList.remove('ovf-x');
+    });
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(markOverflow);
+  }
+  markOverflow();
+  var ovfTimer = null;
+  window.addEventListener(
+    'resize',
+    function () {
+      clearTimeout(ovfTimer);
+      ovfTimer = setTimeout(markOverflow, 150);
+    },
+    { passive: true }
+  );
+
+  // ---------- 6. 回到顶部 ----------
   var toTop = document.createElement('button');
   toTop.className = 'to-top';
   toTop.type = 'button';
