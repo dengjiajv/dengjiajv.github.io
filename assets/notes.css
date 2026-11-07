@@ -318,6 +318,17 @@ ol.enum.depth-2 > li > .li-lab { left: -3.4em; }
 }
 .fig-n { font-weight: 600; color: var(--ink-2); margin-right: 6px; }
 
+/* 表格（讲义里只有严镇军习题全解用到一次，用 KaTeX 的 array 渲染） */
+.tbl { margin: 1.4em 0 1.6em; }
+.tbl .eq-body { overflow-x: auto; overflow-y: hidden; }
+.tbl .katex-display { margin: 0; }
+
+/* 填空题的横线（\hbox to 80mm{}） */
+.blank {
+  display: inline-block; height: 1em; vertical-align: -0.15em;
+  border-bottom: 1px solid currentColor; opacity: .75;
+}
+
 /* 讲义页顶部：原件链接 + 可选内嵌 PDF */
 .src-bar {
   display: flex; align-items: baseline; justify-content: space-between;
