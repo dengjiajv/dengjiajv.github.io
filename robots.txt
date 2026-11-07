@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-# Both deployment endpoints serve identical content
+# Sitemaps must be declared on the same host as this robots.txt,
+# so only the canonical host is listed here.
 Sitemap: https://dengjiajv.github.io/sitemap.xml
-Sitemap: https://dengjiaju.pages.dev/sitemap.xml
