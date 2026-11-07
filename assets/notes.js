@@ -104,6 +104,40 @@
     { passive: true }
   );
 
+  // ---------- 5b. 宽列表标签（「Method 1」这类）改为内联前缀 ----------
+  // 标签默认绝对定位在 left:-2.2em，只留出约 2.2em 的悬挂宽度；
+  // 比这更宽的标签会压到正文上，所以实测过宽时给 <li> 加 .lab-wide，
+  // 由 CSS 把它改成行内前缀（见 notes.css 里 lab-wide 的规则）。
+  function markWideLabels() {
+    var lis = document.querySelectorAll('ol.enum > li');
+    Array.prototype.forEach.call(lis, function (li) {
+      var lab = li.querySelector(':scope > .li-lab');
+      if (!lab) return;
+      li.classList.remove('lab-wide');
+      var cs = window.getComputedStyle(li);
+      var padLeft = parseFloat(cs.paddingLeft) || 0;
+      var first = li.firstElementChild === lab ? lab.nextElementSibling : li.firstElementChild;
+      if (!first) return;
+      var labRight = lab.getBoundingClientRect().right;
+      var firstLeft = first.getBoundingClientRect().left;
+      // 绝对定位的标签右缘越过正文左缘 1px 以上 -> 视为过宽
+      if (labRight > firstLeft + 1 && padLeft >= 0) li.classList.add('lab-wide');
+    });
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(markWideLabels);
+  }
+  markWideLabels();
+  window.addEventListener(
+    'resize',
+    function () {
+      clearTimeout(labTimer);
+      labTimer = setTimeout(markWideLabels, 150);
+    },
+    { passive: true }
+  );
+  var labTimer = null;
+
   // ---------- 6. 回到顶部 ----------
   var toTop = document.createElement('button');
   toTop.className = 'to-top';

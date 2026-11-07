@@ -295,6 +295,13 @@ ol.enum > li::before { content: none; }
   font-family: var(--sans); font-size: .86em; line-height: 1.9;
   color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap;
 }
+/* 宽标签（「Method 1」这类）绝对定位会伸进正文，改成内联前缀并把悬挂量让出来。
+   由 notes.js 按实测宽度加 .lab-wide。 */
+ol.enum > li.lab-wide { padding-left: 0; }
+ol.enum > li.lab-wide > .li-lab {
+  position: static; display: inline; min-width: 0; margin-right: .45em;
+  float: none;
+}
 ol.enum.depth-1 { padding-left: 2.4em; }
 ol.enum.depth-1 > li > .li-lab { left: -2.4em; }
 ol.enum.depth-2 { padding-left: 3.4em; }
