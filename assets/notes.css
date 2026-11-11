@@ -118,15 +118,31 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .sb-ch.active .sb-num { color: var(--accent); }
 
-.sb-toc { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); }
-.sb-toc-title { font-size: 11px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase; margin-bottom: 8px; }
+/* 侧栏底部的「本讲目录 / 本章目录」——资料各内容页左下角那一块。
+   样式与原先正文里的目录卡片一致：白色版块填充、圆角细边，
+   光标悬停时出现一条强调色的半透明条带（不是实色块）。 */
+.sb-toc {
+  margin-top: 26px; padding: 14px 12px 10px;
+  background: var(--paper);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .02);
+}
+.sb-toc-title {
+  font-size: 12px; font-weight: 600; letter-spacing: .06em;
+  color: var(--ink); margin-bottom: 6px; padding: 0 8px 8px;
+  border-bottom: 1px solid var(--line-2);
+}
 .sb-sec {
   display: flex; gap: 7px; align-items: baseline;
-  padding: 3px 8px; border-radius: 5px;
+  padding: 4px 8px; border-radius: 5px;
   font-size: 12.8px; color: var(--ink-3); line-height: 1.5;
+  transition: background .15s, color .15s;
 }
 .sb-sec .sb-num { font-size: 10.5px; }
-.sb-sec:hover { background: var(--line-2); color: var(--ink); text-decoration: none; }
+.sb-sec:hover {
+  background: rgba(29, 78, 111, .09);   /* accent 的半透明条带 */
+  color: var(--accent); text-decoration: none;
+}
 
 /* ---------------------------------------------------------- 正文 */
 .content { min-width: 0; padding: 34px 0 90px; max-width: 780px; }
@@ -148,39 +164,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   letter-spacing: .04em; margin-bottom: 34px;
   padding-bottom: 18px; border-bottom: 1px solid var(--line);
 }
-
-/* 长文的章节目录（目前只有 61 页的《严镇军习题全解》用）：
-   排在标题与元信息下面，像一页书的目录；每行只有章名，点击跳转。 */
-.page-toc {
-  margin: 0 0 40px;
-  padding: 18px 20px 16px;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-.page-toc-head {
-  display: flex; align-items: baseline;
-  gap: 12px; margin-bottom: 12px; padding-bottom: 10px;
-  /* 与下面链接文字的左缘对齐（链接有 4px 内边距），否则「目录」看起来偏左。 */
-  padding-left: 4px;
-  border-bottom: 1px solid var(--line-2);
-}
-.page-toc-title {
-  font-family: var(--sans); font-size: 17px; font-weight: 600;
-  letter-spacing: .06em; color: var(--ink);
-}
-.page-toc-list {
-  list-style: none; margin: 0; padding: 0;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1px 26px;
-}
-.page-toc-list li { min-width: 0; }
-.page-toc-list a {
-  display: flex; align-items: baseline; gap: 10px;
-  padding: 4px 6px 4px 4px; border-radius: 5px;
-  font-size: 14.5px; color: var(--ink-2); line-height: 1.5;
-}
-.page-toc-list a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
-.pt-title { flex: 1 1 auto; min-width: 0; }
 
 .note { font-size: 16.5px; }
 .note p { margin: 0 0 1.05em; }
@@ -709,7 +692,7 @@ body.lb-open { overflow: hidden; }
 .anchor-link:hover { color: var(--accent); text-decoration: none; }
 
 .sb-sec.cur {
-  background: var(--accent-soft); color: var(--accent);
+  background: rgba(29, 78, 111, .13); color: var(--accent);
   font-weight: 600;
 }
 
@@ -792,12 +775,6 @@ body.lb-open { overflow: hidden; }
   .pager-next { text-align: left; }
   .ch-toc { margin-left: 0; }
   .ch-card { padding-left: 10px; }
-}
-
-@media (max-width: 720px) {
-  .page-toc { padding: 15px 14px 12px; margin-bottom: 30px; }
-  .page-toc-list { grid-template-columns: 1fr; gap: 0; }
-  .page-toc-list a { font-size: 14px; padding: 6px 4px; }
 }
 
 @media (max-width: 720px) {
