@@ -161,11 +161,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .page-toc-head {
   display: flex; align-items: baseline;
   gap: 12px; margin-bottom: 12px; padding-bottom: 10px;
+  /* 与下面链接文字的左缘对齐（链接有 4px 内边距），否则「目录」看起来偏左。 */
+  padding-left: 4px;
   border-bottom: 1px solid var(--line-2);
 }
 .page-toc-title {
-  font-family: var(--sans); font-size: 15px; letter-spacing: .08em;
-  color: var(--ink-2);
+  font-family: var(--sans); font-size: 17px; font-weight: 600;
+  letter-spacing: .06em; color: var(--ink);
 }
 .page-toc-list {
   list-style: none; margin: 0; padding: 0;
