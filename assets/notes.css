@@ -149,6 +149,51 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   padding-bottom: 18px; border-bottom: 1px solid var(--line);
 }
 
+/* 长文的章节目录（目前只有 61 页的《严镇军习题全解》用）：
+   排在标题与元信息下面，像一页书的目录；每行左边是章号，右边是章名。 */
+.page-toc {
+  margin: 0 0 40px;
+  padding: 18px 20px 16px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.page-toc-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 12px; margin-bottom: 12px; padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-2);
+}
+.page-toc-title {
+  font-family: var(--sans); font-size: 11.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.page-toc-note { font-family: var(--sans); font-size: 11.5px; color: var(--muted); }
+.page-toc-list {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px 26px;
+}
+.page-toc-list li { min-width: 0; }
+.page-toc-list a {
+  display: flex; align-items: baseline; gap: 10px;
+  padding: 4px 6px 4px 4px; border-radius: 5px;
+  font-size: 14.5px; color: var(--ink-2); line-height: 1.5;
+}
+.page-toc-list a:hover { background: var(--accent-soft); color: var(--accent); text-decoration: none; }
+.pt-num {
+  font-family: var(--sans); font-size: 12px; font-weight: 600; color: var(--muted);
+  min-width: 1.3em; flex: 0 0 auto; font-variant-numeric: tabular-nums;
+}
+.page-toc-list a:hover .pt-num { color: var(--accent); }
+.pt-title { flex: 1 1 auto; min-width: 0; }
+.pt-num-empty { color: var(--line); }
+/* 每章题数：右对齐的小字，扫一眼就知道哪章要练多少 */
+.pt-cnt {
+  font-family: var(--sans); font-size: 11.5px; color: var(--muted);
+  flex: 0 0 auto; font-variant-numeric: tabular-nums;
+  min-width: 3.2em; text-align: right;
+}
+.page-toc-list a:hover .pt-cnt { color: var(--accent); }
+
 .note { font-size: 16.5px; }
 .note p { margin: 0 0 1.05em; }
 .note > p:first-of-type { margin-top: 0; }
@@ -759,6 +804,12 @@ body.lb-open { overflow: hidden; }
   .pager-next { text-align: left; }
   .ch-toc { margin-left: 0; }
   .ch-card { padding-left: 10px; }
+}
+
+@media (max-width: 720px) {
+  .page-toc { padding: 15px 14px 12px; margin-bottom: 30px; }
+  .page-toc-list { grid-template-columns: 1fr; gap: 0; }
+  .page-toc-list a { font-size: 14px; padding: 6px 4px; }
 }
 
 @media (max-width: 720px) {
