@@ -256,24 +256,31 @@ img { max-width: 100%; display: block; }
 .tool .dir-d { margin-bottom: 14px; }
 .tool .tags li { color: var(--ink-2); background: var(--line-2); }
 
-/* 参考：教材 / 讲义 两栏，行内是「书名 (作者) + 页数」 */
+/* 参考：教材 / 讲义 两张卡，卡内是「书名 (作者) + 页数」的行 */
 .ref-grid {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 40px;
-  margin-top: 6px;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px;
+  margin-top: 14px;
 }
-.ref-col { min-width: 0; }
+.ref-col {
+  min-width: 0; padding: 22px 24px 16px;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--paper); transition: border-color .2s, box-shadow .2s;
+}
+.ref-col:hover { border-color: #d5d4cc; box-shadow: 0 8px 26px rgba(20, 30, 45, .05); }
 .ref-h {
-  display: flex; align-items: baseline; gap: 9px;
-  font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3);
-  padding-bottom: 8px; border-bottom: 1px solid var(--line);
-  margin-bottom: 4px;
+  display: flex; align-items: baseline; gap: 10px;
+  font-family: var(--serif); font-size: 19px; font-weight: 600;
+  color: var(--ink); letter-spacing: .01em; margin: 0 0 6px;
 }
-.ref-h-en { font-size: 10.5px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; }
+.ref-h-en {
+  font-family: var(--sans); font-size: 11px; font-weight: 400; letter-spacing: .1em;
+  color: var(--muted); text-transform: uppercase;
+}
 .ref-list { list-style: none; margin: 0; padding: 0; }
 .ref-row { margin: 0; }
 .ref-link {
   display: flex; align-items: baseline; gap: 12px;
-  padding: 9px 10px 9px 8px; margin: 0 -10px;
+  padding: 8px 10px; margin: 0 -10px;
   border-left: 2px solid transparent; border-radius: 4px;
   transition: background .16s, border-color .16s;
 }
