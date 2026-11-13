@@ -1,0 +1,197 @@
+/* ============================================================
+   参考书目阅读器（/refs/）
+   与笔记页共用一套色板（变量定义在 notes.css 的 :root 里），
+   但布局完全不同：整屏高、左侧目录、右侧独立滚动的 PDF 画布。
+   ============================================================ */
+
+/* ---------- 书目目录页 ---------- */
+.rf-outline { max-width: 880px; margin: 0 auto; padding: 46px 28px 100px; }
+.rf-head { padding-bottom: 26px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.rf-head h1 { font-size: 32px; line-height: 1.32; margin: 0 0 8px; font-weight: 600; letter-spacing: .01em; }
+.rf-head .rf-en {
+  font-family: var(--sans); font-size: 12.5px; letter-spacing: .1em;
+  color: var(--muted); text-transform: uppercase; margin: 0 0 14px;
+}
+.rf-head .rf-lead { font-size: 15px; line-height: 1.85; color: var(--ink-2); margin: 0; max-width: 46em; }
+
+.rf-group-title {
+  display: flex; align-items: baseline; gap: 10px;
+  margin: 38px 0 4px; padding-bottom: 10px; border-bottom: 1px solid var(--line-2);
+  font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: .02em;
+}
+.rf-group-title .rf-g-en {
+  font-family: var(--sans); font-size: 11px; letter-spacing: .1em;
+  color: var(--muted); text-transform: uppercase; font-weight: 400;
+}
+.rf-group-title .rf-g-n {
+  margin-left: auto; font-family: var(--sans); font-size: 11.5px;
+  color: var(--muted); font-weight: 400; letter-spacing: .04em;
+}
+
+.rf-list { display: flex; flex-direction: column; }
+.rf-item {
+  display: block; padding: 16px 14px 16px 12px;
+  border-bottom: 1px solid var(--line-2); border-left: 2px solid transparent;
+  transition: border-color .16s, background .16s;
+}
+.rf-item:hover { border-left-color: var(--accent); background: rgba(29, 78, 111, .022); text-decoration: none; }
+.rf-item-title {
+  display: block; font-size: 16.5px; font-weight: 600; color: var(--ink);
+  line-height: 1.45; margin-bottom: 4px;
+}
+.rf-item:hover .rf-item-title { color: var(--accent); }
+.rf-item-title .rf-author { font-weight: 400; color: var(--ink-2); }
+.rf-item-meta {
+  display: block; font-family: var(--sans); font-size: 12px; color: var(--muted);
+  letter-spacing: .02em; margin-bottom: 7px;
+}
+.rf-item-blurb { display: block; font-size: 14px; line-height: 1.8; color: var(--ink-2); margin: 0; max-width: 44em; }
+.rf-item-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 9px; font-family: var(--sans); }
+.rf-item-tags span {
+  font-size: 11.5px; color: var(--ink-3); background: var(--paper);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px 10px;
+}
+.rf-subject {
+  font-size: 11px; color: var(--accent); background: var(--accent-soft);
+  border: 1px solid rgba(29, 78, 111, .16); border-radius: 999px; padding: 2px 10px;
+}
+
+/* ---------- 阅读器：整屏两栏 ---------- */
+/* html 上也锁一层：body 的 overflow:hidden 管不住 html 的滚动条，
+   不锁的话某些浏览器仍会出现整页滚动条（目录与画布各滚一层，很难用）。 */
+.ref-lock { height: 100%; overflow: hidden; }
+body.ref-page {
+  height: 100vh; height: 100dvh;
+  display: flex; flex-direction: column;
+  overflow: hidden;                 /* 页面本身不滚，只有右侧画布区滚 */
+  background: var(--bg);
+}
+body.ref-page .topbar { position: static; flex: 0 0 auto; }
+.rf-main {
+  flex: 1 1 auto; min-height: 0;
+  display: grid; grid-template-columns: 296px minmax(0, 1fr);
+}
+
+/* ---------- 左：章节目录 ---------- */
+.rf-side {
+  min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--paper); border-right: 1px solid var(--line);
+  padding: 20px 0 48px; font-family: var(--sans);
+  scrollbar-width: thin;
+}
+.rf-side::-webkit-scrollbar { width: 6px; }
+.rf-side::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+.rf-side-in { padding: 0 14px; }
+.rf-back { display: inline-block; margin-bottom: 16px; font-size: 12.5px; color: var(--muted); letter-spacing: .04em; }
+.rf-back:hover { color: var(--accent); text-decoration: none; }
+.rf-bt { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.5; margin: 0 0 3px; }
+.rf-ba { font-size: 12px; color: var(--muted); margin: 0 0 4px; line-height: 1.6; }
+.rf-toc { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); }
+.rf-toc-title {
+  font-size: 11px; letter-spacing: .1em; color: var(--muted);
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.rf-ch {
+  display: flex; gap: 9px; align-items: baseline;
+  padding: 5px 9px; border-radius: 6px; border-left: 2px solid transparent;
+  font-size: 13px; color: var(--ink-2); line-height: 1.55; cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.rf-ch:hover { background: var(--line-2); color: var(--ink); text-decoration: none; }
+.rf-ch.cur { background: var(--accent-soft); color: var(--accent); border-left-color: var(--accent); font-weight: 600; }
+.rf-ch-n { flex: 0 0 auto; min-width: 13px; font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rf-ch.cur .rf-ch-n { color: var(--accent); }
+.rf-ch-p { margin-left: auto; flex: 0 0 auto; font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rf-part {
+  margin: 14px 0 4px; padding: 0 9px;
+  font-size: 10.5px; letter-spacing: .1em; color: var(--muted); text-transform: uppercase;
+}
+.rf-part:first-child { margin-top: 0; }
+.rf-dl {
+  display: inline-block; margin: 22px 9px 0;
+  font-size: 12.5px; color: var(--accent); border-bottom: 1px solid transparent;
+}
+.rf-dl:hover { border-bottom-color: var(--accent); text-decoration: none; }
+
+/* ---------- 右：PDF 画布 ---------- */
+.rf-viewer {
+  position: relative; min-width: 0; min-height: 0;
+  overflow: auto; overscroll-behavior: contain;
+  background: #efeee9;
+  scrollbar-width: thin;
+}
+.rf-viewer::-webkit-scrollbar { width: 10px; height: 10px; }
+.rf-viewer::-webkit-scrollbar-thumb { background: #c8c6be; border-radius: 5px; }
+.rf-viewer::-webkit-scrollbar-thumb:hover { background: #b3b1a8; }
+
+.rf-bar {
+  position: sticky; top: 0; z-index: 6;
+  display: flex; align-items: center; gap: 10px;
+  height: 42px; padding: 0 14px;
+  background: rgba(239, 238, 233, .93);
+  backdrop-filter: saturate(160%) blur(10px); -webkit-backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, .07);
+  font-family: var(--sans); font-size: 12.5px; color: var(--ink-3);
+}
+.rf-pos { font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.rf-pos b { font-weight: 600; color: var(--ink); }
+.rf-tools { margin-left: auto; display: flex; align-items: center; gap: 4px; }
+.rf-btn {
+  appearance: none; border: 1px solid var(--line); background: var(--paper);
+  color: var(--ink-2); border-radius: 6px; cursor: pointer;
+  height: 26px; min-width: 26px; padding: 0 7px;
+  font-family: var(--sans); font-size: 12.5px; line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background .14s, border-color .14s, color .14s;
+}
+.rf-btn:hover { background: #fff; border-color: #cfcec6; color: var(--ink); }
+.rf-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.rf-btn:disabled { opacity: .45; cursor: default; }
+.rf-menu { display: none; }
+.rf-zoom { min-width: 44px; font-variant-numeric: tabular-nums; border-color: transparent; background: none; }
+.rf-zoom:hover { background: var(--paper); border-color: var(--line); }
+
+.rf-pages { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 16px 0 44px; }
+.rf-page {
+  position: relative; flex: 0 0 auto;
+  background: #fff; border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(20, 26, 38, .16), 0 6px 18px rgba(20, 26, 38, .07);
+  overflow: hidden;
+}
+.rf-page canvas { display: block; width: 100% !important; height: 100% !important; }
+.rf-page::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, #fbfbfa 0%, #f4f3ef 100%);
+  opacity: 0; transition: opacity .2s ease; pointer-events: none;
+}
+.rf-page.blank::after { opacity: 1; }
+.rf-page .rf-ph {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--sans); font-size: 12px; color: #b9b7ae; letter-spacing: .06em;
+}
+
+.rf-err {
+  margin: 60px auto; max-width: 34em; padding: 22px 24px;
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  font-family: var(--sans); font-size: 13.5px; line-height: 1.8; color: var(--ink-2);
+}
+.rf-err b { display: block; margin-bottom: 6px; color: var(--ink); }
+
+/* ---------- 窄屏：目录变抽屉 ---------- */
+.rf-scrim { display: none; }
+@media (max-width: 900px) {
+  .rf-main { grid-template-columns: minmax(0, 1fr); }
+  .rf-menu { display: inline-flex; }
+  .rf-side {
+    position: fixed; top: 56px; bottom: 0; left: 0; z-index: 30;
+    width: min(86vw, 320px); border-right: 1px solid var(--line);
+    box-shadow: 0 10px 40px rgba(20, 26, 38, .18);
+    transform: translateX(-102%); transition: transform .22s ease;
+  }
+  .rf-side.open { transform: translateX(0); }
+  .rf-scrim {
+    position: fixed; inset: 56px 0 0; z-index: 20; background: rgba(14, 18, 26, .34);
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  .rf-scrim.on { display: block; opacity: 1; pointer-events: auto; }
+}

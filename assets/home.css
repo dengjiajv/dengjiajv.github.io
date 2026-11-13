@@ -256,6 +256,42 @@ img { max-width: 100%; display: block; }
 .tool .dir-d { margin-bottom: 14px; }
 .tool .tags li { color: var(--ink-2); background: var(--line-2); }
 
+/* 参考：教材 / 讲义 两栏，行内是「书名 (作者) + 页数」 */
+.ref-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 40px;
+  margin-top: 6px;
+}
+.ref-col { min-width: 0; }
+.ref-h {
+  display: flex; align-items: baseline; gap: 9px;
+  font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3);
+  padding-bottom: 8px; border-bottom: 1px solid var(--line);
+  margin-bottom: 4px;
+}
+.ref-h-en { font-size: 10.5px; letter-spacing: .12em; color: var(--muted); text-transform: uppercase; }
+.ref-list { list-style: none; margin: 0; padding: 0; }
+.ref-row { margin: 0; }
+.ref-link {
+  display: flex; align-items: baseline; gap: 12px;
+  padding: 9px 10px 9px 8px; margin: 0 -10px;
+  border-left: 2px solid transparent; border-radius: 4px;
+  transition: background .16s, border-color .16s;
+}
+.ref-link:hover {
+  background: rgba(29, 78, 111, .035); border-left-color: var(--accent);
+  text-decoration: none;
+}
+.ref-title {
+  font-size: 14.5px; line-height: 1.6; color: var(--ink); min-width: 0;
+  transition: color .16s;
+}
+.ref-link:hover .ref-title { color: var(--accent); }
+.ref-meta {
+  margin-left: auto; flex: 0 0 auto;
+  font-family: var(--sans); font-size: 11.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
 /* 论文 */
 .sub-h {
   display: flex; align-items: baseline; gap: 12px;
@@ -400,6 +436,7 @@ a.c-item:hover, button.c-item:hover { border-color: #d3d2cb; transform: translat
   .interests { grid-template-columns: 1fr; gap: 0; }
   .dir-grid { grid-template-columns: 1fr; }
   .tool-grid { grid-template-columns: 1fr; }
+  .ref-grid { grid-template-columns: 1fr; gap: 22px; }
   .paper { grid-template-columns: 1fr; gap: 18px; }
   .paper-fig { max-width: 380px; }
   .nav-inner { padding: 0 22px; height: 56px; }
